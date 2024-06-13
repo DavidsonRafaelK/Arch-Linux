@@ -93,21 +93,76 @@ pacman -S amd-ucode sof-firmware grub sudo efibootmgr base-devel git nano cpupow
 ```
 Perintah ini menginstal berbagai paket tambahan yang diperlukan untuk sistem, termasuk microcode untuk prosesor AMD, firmware untuk perangkat audio, bootloader GRUB, dan berbagai utilitas dan aplikasi dasar lainnya. **( Install sesuai preferensi dan kebutuhan anda )**.
 
-15. nano /etc/default/cpupower
-    <details>
-    <summary>Sebelum</summary>
-    ```sh
-    #governor=`performance`
-    #min_freq="2600Mhz"
-    #max-freq="2600Mhz"
-    ```
-    </details>
+### 15. nano /etc/default/cpupower
+```sh
+nano /etc/default/cpupower
+```
+Anda akan mengubah pengaturan default cpupower untuk mengoptimalkan performa prosesor.
 
-    <details>
-    <summary>Sesudah</summary>
-    ```sh
-    governor=`performance`
-    min_freq="2600Mhz"
-    max-freq="2600Mhz"
-    ```
-    </details>
+<details>
+<summary>Sebelum</summary>
+
+```
+#governor=`ondemand` 
+#min_freq="2.25Ghz" 
+#max-freq="3Ghz"
+```
+</details>
+
+<details>
+<summary>Sesudah</summary>
+
+```
+governor=`performance` 
+min_freq="2600Mhz" 
+max-freq="2600Mhz"
+```
+</details>
+Pengaturan di atas akan mengatur governor ke `performance` dan menetapkan frekuensi minimum dan maksimum ke 2600MHz.
+
+### 16.Mengaktifkan cpupower Service
+Aktifkan cpupower service agar berjalan otomatis saat boot:
+```sh
+systemctl enable cpupower
+```
+Perintah ini memungkinkan cpupower untuk mengatur frekuensi prosesor sesuai dengan konfigurasi yang telah Anda tentukan.
+
+### 17. Membuat kata sandi untuk Root
+```sh
+passwd
+```
+
+### 18. Menambahkan Pengguna Baru
+```sh
+useradd -m -g users -G wheel mamaUser
+```
+Anda membuat pengguna baru `mamaUser` dengan grup utama `users` dan menambahkannya ke grup `wheel` untuk memiliki akses **sudo**.
+
+### 19. passwd (namaUser)
+```sh
+passwd mamaUser
+```
+Ini akan meminta Anda untuk mengatur kata sandi untuk pengguna baru (mamaUser) yang telah ditambahkan sebelumnya.
+### 20. Mengedit File sudoers
+Anda akan mengubah konfigurasi **sudoers** untuk memberikan akses **sudo** kepada pengguna dalam grup `wheel`.
+
+<details>
+<summary>Sebelum</summary>
+
+```
+#wheel ALL=(ALL:ALL) ALL
+```
+<details>
+<summary>Sesudah</summary>
+
+```
+wheel ALL=(ALL:ALL) ALL
+```
+Ini akan mengaktifkan akses **sudo** untuk pengguna dalam grup `wheel`.
+21. Instalasi GRUB Bootloader
+Instal GRUB bootloader untuk UEFI dengan nama label "Arch Linux":
+```sh
+grub-install --target=x86_64-efi --bootloader-id="Arch Linux" --recheck
+```
+Perintah ini akan menginstal GRUB bootloader pada partisi EFI dengan label "Arch Linux".
+
