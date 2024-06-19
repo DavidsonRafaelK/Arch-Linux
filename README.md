@@ -3,10 +3,10 @@
 ## Persiapan Instalasi 
 1. **Koneksi Internet** : Pastikan host machine terhubung ke internet agar dapat mengakses dan mengunduh paket-paket yang diperlukan.
 2. **Live USB Arch Linux**: Buat live USB Arch Linux yang dapat digunakan untuk booting ke sistem **Arch Linux**.
+  - [x] [Download ISO]( https://archlinux.org/download/ ) image
 3. **Rencana Partisi Disk**: Rencanakan partisi disk, misalnya:
    - [x] `/dev/vda1` untuk **EFI System Partition (ESP)** dengan `FAT32`.
    - [x] `/dev/vda2` untuk **root** partition dengan `ext4`.
-   - [x] [Download ISO]( https://archlinux.org/download/ ) image
 4. **Waktu dan Ketelitian**: Proses instalasi membutuhkan ketelitian untuk mengikuti langkah-langkah dengan benar dan memastikan tidak ada kesalahan, terutama dalam memilih disk dan partisi yang benar.
 
 ## Tutorial Installasi 
